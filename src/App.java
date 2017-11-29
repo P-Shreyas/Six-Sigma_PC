@@ -58,18 +58,35 @@ public class App {
             val=str[i].getValue();
             i++;
             uc++;
-            System.out.println(str[i].getLabel()+" "+str[i+1].getLabel());
+            //System.out.println(str[i].getLabel()+" "+str[i+1].getLabel());
         }
         while (str[i].getValue() == val)
         {
             i--;
             uc--;
         }
-
-
-
         return uc;
 
+    }
+
+    public double getBottomCount()
+    {
+        double bc=1;
+        int i=strCtr-1;
+        double val=0;
+        while(str[i].getLabel().equals(str[i-1].getLabel()))
+        {
+            val=str[i].getValue();
+            i--;
+            bc++;
+            //System.out.println(str[i].getLabel()+" "+str[i+1].getLabel());
+        }
+        while (str[i].getValue() == val)
+        {
+            i++;
+            bc--;
+        }
+        return bc;
     }
 
 
@@ -101,10 +118,13 @@ public class App {
                     bm++;
                 }
             }
-            System.out.println(um+" "+bm);
+
 
             if(bm > 0 || um > 0)
+            {
+                System.out.println("Ambiguous state");
                 result=true;
+            }
         }
 
 
@@ -129,8 +149,8 @@ public class App {
         }
         else
         {
-            double uc=app.getUpperCount();
-            score=uc;
+            score+=app.getUpperCount();
+            score+=app.getBottomCount();
         }
         System.out.println("Final score:"+score);
     }
