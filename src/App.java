@@ -3,7 +3,8 @@ public class App {
     Store[] str=new Store[16];
     int strCtr=0;
     BufferedReader br=null;
-
+    String GOOD="Good";
+    String BAD="Bad";
     public void readData()
     {
         try {
@@ -61,6 +62,45 @@ public class App {
         return uc;
     }
 
+
+    public boolean sameTopAndBottomLabel()
+    {
+        boolean result=false;
+        if(str[0].getLabel().equals(str[strCtr-1].getLabel()))
+            result=true;
+        else {
+            int um=0;
+            int bm=0;
+            int i=0;
+            while (str[i].getValue() == str[i+1].getValue())
+            {
+                i++;
+                if(!str[i].getLabel().equals(str[i+1].getLabel()))
+                {
+                    um++;
+                }
+
+            }
+
+            i=strCtr-1;
+            while (str[i].getValue() == str[i-1].getValue())
+            {
+                i--;
+                if(!str[i].getLabel().equals(str[i-1].getLabel()))
+                {
+                    bm++;
+                }
+            }
+            System.out.println(um+" "+bm);
+
+            if(bm > 0 || um > 0)
+                result=true;
+        }
+
+
+        return result;
+    }
+
     public void showData()
     {
         for(int i=0;i<strCtr;i++)
@@ -72,6 +112,8 @@ public class App {
         app.readData();
         app.sortData();
         app.showData();
+        if(app.sameTopAndBottomLabel())
+            System.out.println("same tb");
         double uc = app.getUpperCount();
     }
 }

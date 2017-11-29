@@ -10,4 +10,10 @@ public class Store {
     public String getLabel() {
         return label;
     }
+
+    Store(String label,double value)
+    {
+        this.label=label;
+        this.value=value;
+    }
 }
