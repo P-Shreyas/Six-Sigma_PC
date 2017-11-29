@@ -8,7 +8,7 @@ public class App {
     public void readData()
     {
         try {
-            br = new BufferedReader(new FileReader("/home/shreyas/IdeaProjects/PairedComp/out/production/PairedComp/a.txt"));
+            br = new BufferedReader(new FileReader("/home/shreyas/IdeaProjects/PairedComp/out/production/PairedComp/b.txt"));
             String data;
             while ((data=br.readLine()) != null)
             {
@@ -50,16 +50,26 @@ public class App {
 
     public double getUpperCount()
     {
-        double uc=0;
+        double uc=1;
         int i=0;
+        double val=0;
         while(str[i].getLabel().equals(str[i+1].getLabel()))
         {
-
+            val=str[i].getValue();
             i++;
             uc++;
             System.out.println(str[i].getLabel()+" "+str[i+1].getLabel());
         }
+        while (str[i].getValue() == val)
+        {
+            i--;
+            uc--;
+        }
+
+
+
         return uc;
+
     }
 
 
@@ -112,9 +122,17 @@ public class App {
         app.readData();
         app.sortData();
         app.showData();
+        double score=0;
         if(app.sameTopAndBottomLabel())
-            System.out.println("same tb");
-        double uc = app.getUpperCount();
+        {
+            score=0;
+        }
+        else
+        {
+            double uc=app.getUpperCount();
+            score=uc;
+        }
+        System.out.println("Final score:"+score);
     }
 }
 
